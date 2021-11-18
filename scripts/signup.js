@@ -1,6 +1,7 @@
 const signup = document.getElementById('signup');
 
-function changePage() {
-    window.location.href = "/login/login.html"
-}
-
+signup.addEventListener("click", e => {
+    console.log(e);
+    console.log("clicked");
+    console.log(e);
+})
