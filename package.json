@@ -1,0 +1,30 @@
+{
+  "name": "photo-gallery",
+  "version": "1.0.0",
+  "description": "cmpg323 project 2 photo gallery",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "devstart":"DEBUG=photo-gallery:* & nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coffebean19/photo-gallery.git"
+  },
+  "keywords": [
+    "cmpg323"
+  ],
+  "author": "Coffeebean19",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/coffebean19/photo-gallery/issues"
+  },
+  "homepage": "https://github.com/coffebean19/photo-gallery#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
