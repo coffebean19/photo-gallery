@@ -19,8 +19,13 @@ app.post('/login', (req, res) => {
     var username = req.body.username;
     var password = req.body.password;
     var htmlData = "hello: " + username + "; password: " + password;
-    res.send(htmlData);
-    console.log(postData);
+    res.send(htmlData + " " + postData);
+    console.log(postData + " " + htmlData);
+})
+
+app.get('/login', (req, res) => {
+    console.log(5);
+    res.send('5');
 })
 
 app.listen(3000, () => {
