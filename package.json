@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
-    "devstart":"DEBUG=photo-gallery:* & nodemon app.js"
+    "devstart": "DEBUG=photo-gallery:* & nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -22,7 +22,9 @@
   },
   "homepage": "https://github.com/coffebean19/photo-gallery#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "tedious": "^14.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

@@ -1,0 +1,22 @@
+.start-up-container {
+    background-color: #f7db69;
+    border-top-color: #f26a44;
+    border-right-color: #f26a44;
+    border-bottom-color: #ec1b4b;
+    border-left-color: #ec1b4b;
+    border-width: 0.5rem;
+    border-style: solid;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 1.8rem;
+    
+}
+
+#start-header {
+    padding: 2rem;
+    color: #333;
+}

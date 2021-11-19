@@ -4,18 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/app.css">
+    <link rel="stylesheet" href="/styles/app.css" type="text/css">
+    <link rel="stylesheet" href="/styles/start.css">
     <title>Document</title>
 </head>
 <body>
     <h1>Login</h1>
     <div class="container">
-        <form action="" class="form">
-            <input type="text" placeholder="username">
-            <input type="password" placeholder="Must be 8 letters long... e.g. one twoo">
-        </form>
-        
-    </div>
+        <div class="start-up-container">
+
+            <form action='/login' class="form" method="post">
+                <input name="username" id="username" type="text" placeholder="username" />
+                <input name="password" id="password" type="password" placeholder="Must be 8 letters long... e.g. one twoo" />
+                <button class="btn" type="submit">login</button>
+            </form>
+            <a href="/signup/signup.html" class="btn">Sign up</a>
+        </div>
+        </div>  
     <script src="/scripts/login.js"></script>
 </body>
 </html>
