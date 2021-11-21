@@ -11,9 +11,18 @@ const password = document.getElementById('password');
 
 function divClicked() {
     let _username = username.value;
-    let res = fetch(`/login/${_username}`)
+    let _password = password.value;
+    let res = fetch(`/login/${_username}&${_password}`)
         .then(response => response.json())
-        .then(resJson => console.log(resJson.data))
+        .then(resJson => { 
+            console.log(resJson.logged) 
+            if (resJson.logged == "true") {
+                window.location.href = "/home/home.html"
+            }
+            else {
+                alert("Invald username or password");
+                console.log(resJson.logged);
+            }
+        })
     console.log(res);
-    window.location.href= '/home/home.html';
 }

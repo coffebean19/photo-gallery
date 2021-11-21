@@ -8,6 +8,9 @@ app.use('/scripts', express.static(__dirname + '/www/scripts'));
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+const port = process.env.PORT || 3000;
+
+
 
 app.post('/login', (req, res, next) => {
     var postData = req.body;
@@ -32,12 +35,12 @@ app.get('/login', (req, res) => {
     }
 })
 
-app.get('/login/:username', (req, res) => {
+app.get('/login/:username&:password', (req, res) => {
     try
     {
         console.log(req.params);
         res.status(200).json({
-            data: req.params.username
+            logged: "false"
         });
     } catch(err) {
         res.status(400).json({
@@ -45,8 +48,93 @@ app.get('/login/:username', (req, res) => {
             err
         })
     }
-}) 
+})
 
-app.listen(3000, () => {
-    console.log('Listening over port 3000');
+app.get('/signup/:username&:password', (req, res) => {
+    try
+    {
+        let username = req.params.username;
+        let password = req.params.password;
+        let message = "success";
+
+        //Start of try to connect to database
+
+        var Connection = require('tedious').Connection;  
+        var config = {  
+            server: 'project-323.database.windows.net',  //update me
+            authentication: {
+                type: 'default',
+                options: {
+                    userName: 'coffeebean', //update me
+                    password: 'Simpel projek!2'  //update me
+                }
+            },
+            options: {
+                // If you are on Microsoft Azure, you need encryption:
+                encrypt: true,
+                database: 'photo-gallery'  //update me
+            }
+        };  
+        var connection = new Connection(config);  
+        connection.on('connect', function(err) {  
+            // If no error, then good to proceed.
+            console.log("Connected");  
+            createUser();
+
+            console.log("outside: " + message);
+
+            res.status(200).json({
+                message: message
+            })
+        });
+
+//End of trying to connect to database
+        var Request = require('tedious').Request  
+        var TYPES = require('tedious').TYPES;  
+  
+        function createUser() {  
+            request = new Request(`INSERT INTO dbo.[User] (Username, Password) VALUES ('${username}', '${password}');`, function(err) {  
+             if (err) {  
+                message = "failed";
+                console.log(err);
+                console.log(message);                
+                }  
+            });  
+
+            request.addParameter('Username', TYPES.NVarChar, username);  
+            request.addParameter('Password', TYPES.NVarChar , password); 
+            request.on('row', function(columns) {  
+                columns.forEach(function(column) {  
+                  if (column.value === null) {  
+                    console.log('NULL');  
+                  } else {  
+                    console.log("Product id of inserted item is " + column.value);  
+                  }  
+                });  
+            });
+
+            // Close the connection after the final event emitted by the request, after the callback passes
+            request.on("requestCompleted", function (rowCount, more) {
+                console.log("User added.");
+                connection.close();
+            });
+
+            connection.execSql(request);  
+        }
+
+        connection.connect();
+
+    } catch(err) {
+        res.status(400).json({
+            message: "failed",
+            err
+        })
+    }
+})
+
+
+
+
+app.listen(port, () => {
+    console.log('Listening over port:  ' + port);
 })
