@@ -1,5 +1,5 @@
-const login = document.getElementById('login');
-const confirm = document.getElementById('confirm');
+const username = document.getElementById('username');
+const password = document.getElementById('password');
 
 
 // (async () => {
@@ -10,7 +10,8 @@ const confirm = document.getElementById('confirm');
 // })();
 
 function divClicked() {
-    let res = fetch("/login")
+    let _username = username.value;
+    let res = fetch(`/login/${_username}`)
         .then(response => response.json())
         .then(resJson => console.log(resJson.data))
     console.log(res);

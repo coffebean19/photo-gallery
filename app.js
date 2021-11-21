@@ -32,6 +32,21 @@ app.get('/login', (req, res) => {
     }
 })
 
+app.get('/login/:username', (req, res) => {
+    try
+    {
+        console.log(req.params);
+        res.status(200).json({
+            data: req.params.username
+        });
+    } catch(err) {
+        res.status(400).json({
+            message: "Some error occured",
+            err
+        })
+    }
+}) 
+
 app.listen(3000, () => {
     console.log('Listening over port 3000');
 })
