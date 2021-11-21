@@ -1,31 +1,35 @@
 const express = require('express');
 const app = express();
 
-// app.get('/', (req, res) => {
-//     res.sendFile('/www/index.html', { root: __dirname});
-// });
-
 app.use(express.static(__dirname + '/www'))
 
 app.use('/styles', express.static(__dirname + '/www/styles'));
 app.use('/scripts', express.static(__dirname + '/www/scripts'));
-// app.use('/', express.static(__dirname + '/www/'));
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
-app.post('/login', (req, res) => {
+app.post('/login', (req, res, next) => {
     var postData = req.body;
     var username = req.body.username;
     var password = req.body.password;
     var htmlData = "hello: " + username + "; password: " + password;
-    res.send(htmlData + " " + postData);
     console.log(postData + " " + htmlData);
+    next();
 })
 
 app.get('/login', (req, res) => {
-    console.log(5);
-    res.send('5');
+    try
+    {
+        res.status(200).json({
+            data: "it works!"
+        });
+    } catch(err) {
+        res.status(400).json({
+            message: "Some error occured",
+            err
+        })
+    }
 })
 
 app.listen(3000, () => {
