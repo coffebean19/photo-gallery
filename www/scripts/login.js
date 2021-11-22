@@ -1,17 +1,12 @@
 const username = document.getElementById('username');
 const password = document.getElementById('password');
 
-
-// (async () => {
-//     let res = await fetch("/login");
-//     res.json().then(function(data) {
-//        console.log(data); // Check console for output
-//     });
-// })();
-
+//Does the fetch for checking if the username or password is valid
 function divClicked() {
     let _username = username.value;
     let _password = password.value;
+
+    //The response will be that it is either valid, or not. 
     let res = fetch(`/login/${_username}&${_password}`)
         .then(response => response.json())
         .then(resJson => { 
