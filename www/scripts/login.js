@@ -12,6 +12,7 @@ function divClicked() {
         .then(resJson => { 
             console.log(resJson.logged) 
             if (resJson.logged == "true") {
+                localStorage.setItem("username", _username);
                 window.location.href = "/home/home.html"
             }
             else {

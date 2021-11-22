@@ -176,6 +176,20 @@ app.get('/signup/:username&:password', (req, res) => {
     }
 })
 
+app.get('/home/:username&:filePath', (req, res) => {
+    console.log(req.params);
+    try {
+        res.status(200).json({
+            message: "We made it!"
+        })
+    } catch(err) {
+        res.status(400).json({
+            message: "Its fucked",
+            err
+        })
+    }
+});
+
 app.listen(port, () => {
     console.log('Listening over port:  ' + port);
 })
